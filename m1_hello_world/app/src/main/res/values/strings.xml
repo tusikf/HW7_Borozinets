@@ -6,4 +6,5 @@
     <string name="plus">+</string>
     <string name="minus">-</string>
     <string name="reset">Сброс</string>
+    <string name="counter_default">0</string>
 </resources>
