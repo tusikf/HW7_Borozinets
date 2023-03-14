@@ -14,40 +14,52 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var time = binding.slider.value.toInt()
+        var timerValue = binding.slider.value.toInt()
+        var timerIsActive = false
 
-        binding.slider.addOnChangeListener { _, value, _ ->
-            binding.timer.text = value.toInt().toString()
-            binding.progressBar.max = value.toInt()
-            binding.progressBar.progress = value.toInt()
-            time = value.toInt()
+        fun updateUI(value: Float) {
+            when (timerIsActive) {
+                true -> {
+                    binding.slider.isEnabled = false
+                    binding.buttonStart.visibility = View.GONE
+                    binding.buttonStop.visibility = View.VISIBLE
+                    binding.timer.text = (timerValue - value.toInt()).toString()
+                    binding.progressBar.progress = timerValue - value.toInt()
+                }
+                false -> {
+                    binding.timer.text = value.toInt().toString()
+                    binding.progressBar.max = timerValue
+                    binding.progressBar.progress = timerValue
+                    binding.buttonStop.visibility = View.GONE
+                    binding.buttonStart.visibility = View.VISIBLE
+                    binding.slider.isEnabled = true
+                }
+            }
         }
 
-        fun reset() {
-            binding.timer.text = time.toString()
-            binding.progressBar.progress = time
-            binding.buttonStop.visibility = View.GONE
-            binding.buttonStart.visibility = View.VISIBLE
-            binding.slider.isEnabled = true
+        fun finishTimer() {
+            timerIsActive = false
             Toast.makeText(this, "Timer Task Finished", Toast.LENGTH_SHORT).show()
+            updateUI(timerValue.toFloat())
+        }
+
+        binding.slider.addOnChangeListener { _, value, _ ->
+            timerValue = value.toInt()
+            updateUI(value)
         }
 
         binding.buttonStart.setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {
-                binding.slider.isEnabled = false
-                binding.buttonStart.visibility = View.GONE
-                binding.buttonStop.visibility = View.VISIBLE
-
-                (1..time).asFlow().collect {
+                timerIsActive = true
+                (1..timerValue).asFlow().collect {
                     binding.buttonStop.setOnClickListener {
-                        reset()
+                        finishTimer()
                         cancel()
                     }
-                    binding.timer.text = (time - it).toString()
-                    binding.progressBar.progress = time - it
+                    updateUI(it.toFloat())
                     delay(1000)
                 }
-                reset()
+                finishTimer()
             }
         }
     }
