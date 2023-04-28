@@ -20,10 +20,12 @@ object QuizStorage {
     private val quizRu = object : Quiz {
         override val questions: List<Question> = listOf(
             Question(
-                question = "Сколько участников в kpop группе BTS?",
+                question = "Как тебе наш Android курс?",
                 answers = listOf(
-                    "0",
-                    "7",
+                    "на 2",
+                    "на 3",
+                    "на 4",
+                    "на 5",
                 ),
                 feedback = listOf(
                     "Вам не нравится наш курс.",
@@ -33,10 +35,12 @@ object QuizStorage {
                 ),
             ),
             Question(
-                question = "Как называется лейбл звукозаписи chief keef-a?",
+                question = "Порекомендуешь его друзьям?",
                 answers = listOf(
-                    "GLO GANG",
-                    "DRAIN GANG",
+                    "Обзательно",
+                    "Уже порекомендовал",
+                    "Посмотрим, что будет дальше",
+                    "Нет",
                 ),
                 feedback = listOf(
                     "Вы готовы порекомендовать наш курс.",
@@ -46,10 +50,12 @@ object QuizStorage {
                 ),
             ),
             Question(
-                question = "Настоящее имя исполнителя Blood Orange?",
+                question = "Пользовался ли ты обратной связью?",
                 answers = listOf(
-                    "Devonté Hynes",
-                    "Rakim Athelaston Mayers",
+                    "Да",
+                    "Еще нет, но сейчас воспользуюсь",
+                    "Нет, еще не приходилось",
+                    "Нет, и не буду",
                 ),
                 feedback = listOf(
                     "Спасибо за обратную связь!",
@@ -65,10 +71,12 @@ object QuizStorage {
     private val quizEn = object : Quiz {
         override val questions: List<Question> = listOf(
             Question(
-                question = "How many members are in kpop group BTS?",
+                question = "Please, Rate Android course?",
                 answers = listOf(
-                    "0",
-                    "7",
+                    "F",
+                    "C",
+                    "B",
+                    "A++",
                 ),
                 feedback = listOf(
                     "You have rated us F",
@@ -78,10 +86,12 @@ object QuizStorage {
                 ),
             ),
             Question(
-                question = "What is the name of the record label of chief keef-a?",
+                question = "Do you want to recommend us to your friends?",
                 answers = listOf(
-                    "GLO GANG",
-                    "DRAIN GANG",
+                    "Sure",
+                    "Already recommend",
+                    "I don't know",
+                    "No",
                 ),
                 feedback = listOf(
                     "You want to recommend our course",
@@ -91,10 +101,12 @@ object QuizStorage {
                 ),
             ),
             Question(
-                question = "The real name of the artist Blood Orange?",
+                question = "Did you use the course feedback?",
                 answers = listOf(
-                    "Devonté Hynes",
-                    "Rakim Athelaston Mayers",
+                    "Yes",
+                    "Not yet, but now I will use it",
+                    "No, it hasn't happened yet",
+                    "No, and I won't",
                 ),
                 feedback = listOf(
                     "Thanks for feedback!",

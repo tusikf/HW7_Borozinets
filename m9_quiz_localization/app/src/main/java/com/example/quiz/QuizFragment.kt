@@ -53,14 +53,20 @@ class QuizFragment : Fragment() {
         binding.questionText1.text = questions[0].question
         binding.answer11.text = questions[0].answers[0]
         binding.answer12.text = questions[0].answers[1]
+        binding.answer13.text = questions[0].answers[2]
+        binding.answer14.text = questions[0].answers[3]
 
         binding.questionText2.text = questions[1].question
         binding.answer21.text = questions[1].answers[0]
         binding.answer22.text = questions[1].answers[1]
+        binding.answer23.text = questions[1].answers[2]
+        binding.answer24.text = questions[1].answers[3]
 
         binding.questionText3.text = questions[2].question
         binding.answer31.text = questions[2].answers[0]
         binding.answer32.text = questions[2].answers[1]
+        binding.answer33.text = questions[2].answers[2]
+        binding.answer34.text = questions[2].answers[3]
 
     }
 
@@ -68,9 +74,9 @@ class QuizFragment : Fragment() {
     private fun getAnswersByUser(): Int {
         var correctAnswersCount = 0
 
-        if (binding.question1.checkedRadioButtonId == binding.answer12.id) correctAnswersCount++
-        if (binding.question2.checkedRadioButtonId == binding.answer21.id) correctAnswersCount++
-        if (binding.question3.checkedRadioButtonId == binding.answer31.id) correctAnswersCount++
+        if (binding.question1.checkedRadioButtonId == binding.answer11.id) correctAnswersCount++
+        if (binding.question2.checkedRadioButtonId == binding.answer24.id) correctAnswersCount++
+        if (binding.question3.checkedRadioButtonId == binding.answer34.id) correctAnswersCount++
 
         return correctAnswersCount
     }
