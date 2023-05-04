@@ -38,7 +38,7 @@ class ResultFragment : Fragment() {
             repeatMode = ObjectAnimator.REVERSE
         }.start()
 
-        binding.result.text = args.number.toString() + "/3"
+        binding.result.text = args.result
         (AnimatorInflater.loadAnimator(this.context, R.animator.custom_multianimation) as AnimatorSet).apply {
             setTarget(binding.result)
             start()

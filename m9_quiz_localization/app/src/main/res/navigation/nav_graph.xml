@@ -46,8 +46,8 @@
             app:popEnterAnim="@anim/from_left_anim"
             app:popExitAnim="@anim/to_right_anim"/>
         <argument
-            android:name="number"
-            app:argType="integer" />
+            android:name="result"
+            app:argType="string" />
         <action
             android:id="@+id/action_resultFragment_to_quizFragment"
             app:destination="@id/quizFragment"

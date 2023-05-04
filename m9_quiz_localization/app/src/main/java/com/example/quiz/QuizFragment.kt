@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
 import androidx.navigation.fragment.findNavController
 import com.example.quiz.databinding.FragmentQuizBinding
 import java.util.Locale
@@ -27,10 +28,11 @@ class QuizFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        when (Locale.getDefault().displayLanguage) {
-            "русский" -> setLocalData(QuizStorage.getQuiz(QuizStorage.Locale.Ru))
-            "English" -> setLocalData(QuizStorage.getQuiz(QuizStorage.Locale.En))
+        var quizStorage = QuizStorage.getQuiz(QuizStorage.Locale.En)
+        if (Locale.getDefault().displayLanguage == "русский") {
+            quizStorage = QuizStorage.getQuiz(QuizStorage.Locale.Ru)
         }
+        setLocalData(quizStorage)
 
         binding.title.alpha = 0f
         binding.title.animate().apply {
@@ -40,8 +42,8 @@ class QuizFragment : Fragment() {
         }
 
         binding.button.setOnClickListener {
-            val number = getAnswersByUser()
-            val action = QuizFragmentDirections.actionQuizFragmentToResultFragment(number)
+            val answers = getAnswersByUser(quizStorage)
+            val action = QuizFragmentDirections.actionQuizFragmentToResultFragment(answers)
             findNavController().navigate(action)
 
         }
@@ -67,18 +69,23 @@ class QuizFragment : Fragment() {
         binding.answer32.text = questions[2].answers[1]
         binding.answer33.text = questions[2].answers[2]
         binding.answer34.text = questions[2].answers[3]
-
     }
 
 
-    private fun getAnswersByUser(): Int {
-        var correctAnswersCount = 0
+    private fun getAnswersByUser(quizStorage: Quiz): String {
+        val answers = mutableListOf<Int>()
 
-        if (binding.question1.checkedRadioButtonId == binding.answer11.id) correctAnswersCount++
-        if (binding.question2.checkedRadioButtonId == binding.answer24.id) correctAnswersCount++
-        if (binding.question3.checkedRadioButtonId == binding.answer34.id) correctAnswersCount++
+        for (i in 0 until quizStorage.questions.size) {
+            for (j in 0 until  quizStorage.questions[i].answers.size) {
+                if (
+                    quizStorage.questions[i].answers[j] == binding.root.findViewById<RadioButton>(binding.question1.checkedRadioButtonId).text ||
+                    quizStorage.questions[i].answers[j] == binding.root.findViewById<RadioButton>(binding.question2.checkedRadioButtonId).text ||
+                    quizStorage.questions[i].answers[j] == binding.root.findViewById<RadioButton>(binding.question3.checkedRadioButtonId).text
+                ) answers += i
+            }
+        }
 
-        return correctAnswersCount
+        return QuizStorage.answer(quizStorage, answers.toList())
     }
 
     override fun onDestroy() {

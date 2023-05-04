@@ -1,7 +1,5 @@
 package com.example.quiz
 
-import com.example.quiz.Quiz
-
 object QuizStorage {
     fun getQuiz(locale: Locale): Quiz = when (locale) {
         Locale.Ru -> quizRu
