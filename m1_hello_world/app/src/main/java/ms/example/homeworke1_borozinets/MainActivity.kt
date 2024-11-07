@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         var color1 = Color.RED
         var color2 = Color.BLUE
         var color3 = Color.GREEN
+
         binding.counter.text = counter.toString()
         binding.minus.isEnabled = false
         binding.plus.isEnabled = true
