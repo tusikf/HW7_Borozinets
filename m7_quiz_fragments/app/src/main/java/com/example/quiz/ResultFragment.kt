@@ -24,6 +24,7 @@ class ResultFragment : Fragment() {
         return binding.root
     }
 
+
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -32,6 +33,9 @@ class ResultFragment : Fragment() {
 
         binding.button.setOnClickListener {
             findNavController().navigate(R.id.action_resultFragment_to_quizFragment)
+        }
+        binding.button2.setOnClickListener {
+            findNavController().navigate(R.id.action_resultFragment_to_Question)
         }
     }
 
